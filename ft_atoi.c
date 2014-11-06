@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tperret <tperret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/05 17:01:10 by tperret           #+#    #+#             */
-/*   Updated: 2014/11/05 17:28:50 by tperret          ###   ########.fr       */
+/*   Created: 2014/11/06 10:26:33 by tperret           #+#    #+#             */
+/*   Updated: 2014/11/06 10:41:34 by tperret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 
-size_t	ft_strlcat(char *restrict dst, const char restrict *src, size_t size)
+int	ft_atoi(const char *str)
 {
-	size_t i;
-	size_t len;
-	size_t len2;
+	int nb;
+	int p;
 
-	i = 0;
-	len = ft_strlen(dst);
-	len2 = ft_strlen(src);
-	if (size > (len + 1))
-	{
-		while (i < (size - len - 1))
-		{
-			dst[len + i] = src[i];
-			i++;
-		}
-		dst[len + i] = '\0';
-	}
-	if (size >= len)
-		return (len + len2);
-	return ((len + len2) - (len - size));
-}
+	p = 1;
+	nb = 0;
+	while (*str == '\n' || *str == '\t' || *str == ' ' || *str == '\v' 
+			|| *str == '\r' || *str == '\f')
+		str++;
+	if (*str == '-' || *str == '+')
+		p = (*str++ == '+');
+	while (*str <= '9' && *str >= '0')
+		nb = nb * 10 + *str++ - '0';
+	return (p ? nb : (-nb));
 }

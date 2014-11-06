@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_striter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tperret <tperret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/05 17:01:10 by tperret           #+#    #+#             */
-/*   Updated: 2014/11/05 17:28:50 by tperret          ###   ########.fr       */
+/*   Created: 2014/11/06 15:01:03 by tperret           #+#    #+#             */
+/*   Updated: 2014/11/06 15:22:45 by tperret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-size_t	ft_strlcat(char *restrict dst, const char restrict *src, size_t size)
+#include ft_striter(char *s, void (*f)(char *))
 {
-	size_t i;
-	size_t len;
-	size_t len2;
+	int i;
 
 	i = 0;
-	len = ft_strlen(dst);
-	len2 = ft_strlen(src);
-	if (size > (len + 1))
+	if (s!= NULL && f != NULL)
 	{
-		while (i < (size - len - 1))
+		while (s[i] != '\0')
 		{
-			dst[len + i] = src[i];
+			f(s + i);
 			i++;
 		}
-		dst[len + i] = '\0';
 	}
-	if (size >= len)
-		return (len + len2);
-	return ((len + len2) - (len - size));
-}
 }
