@@ -6,10 +6,9 @@
 /*   By: tperret <tperret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/06 10:26:33 by tperret           #+#    #+#             */
-/*   Updated: 2014/11/06 10:41:34 by tperret          ###   ########.fr       */
+/*   Updated: 2014/11/07 10:03:25 by tperret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 int	ft_atoi(const char *str)
 {
@@ -18,7 +17,7 @@ int	ft_atoi(const char *str)
 
 	p = 1;
 	nb = 0;
-	while (*str == '\n' || *str == '\t' || *str == ' ' || *str == '\v' 
+	while (*str == '\n' || *str == '\t' || *str == ' ' || *str == '\v'
 			|| *str == '\r' || *str == '\f')
 		str++;
 	if (*str == '-' || *str == '+')

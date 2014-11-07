@@ -6,7 +6,7 @@
 /*   By: tperret <tperret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/06 13:33:17 by tperret           #+#    #+#             */
-/*   Updated: 2014/11/06 13:42:14 by tperret          ###   ########.fr       */
+/*   Updated: 2014/11/07 10:19:06 by tperret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@ void	ft_putstr(char const *s)
 	int i;
 
 	i = 0;
-	while(s[i])
+	while (s[i])
 		ft_putchar(s[i++]);
 }

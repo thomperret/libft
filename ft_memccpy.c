@@ -6,24 +6,29 @@
 /*   By: tperret <tperret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/05 13:58:06 by tperret           #+#    #+#             */
-/*   Updated: 2014/11/05 14:54:13 by tperret          ###   ########.fr       */
+/*   Updated: 2014/11/07 10:50:12 by tperret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
-void	*ft_memccpy(void *restrict dst, const void *restrict src, int c, size_t n)
+void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
 	unsigned char	*str;
 	unsigned char	*str1;
 	size_t			i;
 
 	str = (unsigned char *)dst;
-	str2 = (unsigned char *)src;
+	str1 = (unsigned char *)src;
 	i = 0;
-	if (str == NULL || str2 == NULL)
+	if (str == NULL || str1 == NULL)
 		return (0);
 	while (i < n)
 	{
-		str[i] = str2[i];
+		str[i] = str1[i];
+		if (str[i] == c)
+			return (str + i + 1);
+		i++;
+	}
+	return (0);
 }

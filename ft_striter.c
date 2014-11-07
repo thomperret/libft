@@ -6,16 +6,18 @@
 /*   By: tperret <tperret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/06 15:01:03 by tperret           #+#    #+#             */
-/*   Updated: 2014/11/06 15:22:45 by tperret          ###   ########.fr       */
+/*   Updated: 2014/11/07 10:30:44 by tperret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include ft_striter(char *s, void (*f)(char *))
+#include "libft.h"
+
+void	ft_striter(char *s, void (*f)(char *))
 {
 	int i;
 
 	i = 0;
-	if (s!= NULL && f != NULL)
+	if (s != NULL && f != NULL)
 	{
 		while (s[i] != '\0')
 		{

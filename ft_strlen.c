@@ -6,13 +6,13 @@
 /*   By: tperret <tperret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 11:19:33 by tperret           #+#    #+#             */
-/*   Updated: 2014/11/04 12:15:25 by tperret          ###   ########.fr       */
+/*   Updated: 2014/11/07 10:32:53 by tperret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <libft.h>
 
-int	ft_strlen(const char* s)
+int	ft_strlen(const char *s)
 {
 	int i;
 

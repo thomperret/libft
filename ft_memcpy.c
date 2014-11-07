@@ -6,13 +6,13 @@
 /*   By: tperret <tperret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/05 13:10:06 by tperret           #+#    #+#             */
-/*   Updated: 2014/11/05 13:55:10 by tperret          ###   ########.fr       */
+/*   Updated: 2014/11/07 10:06:45 by tperret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 
-void *ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
+void *ft_memcpy(void *dst, const void *src, size_t n)
 {
 	unsigned char	*str;
 	unsigned char	*str2;
@@ -21,7 +21,7 @@ void *ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
 	i = 0;
 	str = (unsigned char *)dst;
 	str2 = (unsigned char *)src;
-	if (str == NULL || str2  == NULL)
+	if (str == NULL || str2 == NULL)
 		return (NULL);
 	while (i < n)
 	{
