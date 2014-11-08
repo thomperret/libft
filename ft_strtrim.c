@@ -1,29 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnequ.c                                       :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tperret <tperret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/06 16:38:46 by tperret           #+#    #+#             */
-/*   Updated: 2014/11/07 11:24:01 by tperret          ###   ########.fr       */
+/*   Created: 2014/11/08 09:55:06 by tperret           #+#    #+#             */
+/*   Updated: 2014/11/08 09:55:08 by tperret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strnequ(char const *s1, char const *s2, size_t n)
+char	*ft_strtrim(char const *s)
 {
-	size_t	i;
+	char	*str;
+	int		i;
+	int		j;
+	int		k;
     
 	i = 0;
-	if (s1 == NULL || s2 == NULL)
+	k = -1;
+	if (s == NULL)
 		return (0);
-	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0' && i < (n - 1))
+	j = ft_strlen(s);
+	str = (char *)malloc(sizeof(*str) * j + 1);
+	ft_bzero(str, j + 1);
+	if (str == NULL)
+		return (NULL);
+	while ((s[i] == ' ' || s[i] == '\t' || s[i] == '\n') && s[i] != '\0')
 		i++;
-	if ((s1[i] - s2[i]) == 0)
-		return (1);
-	else
-		return (0);
+	while (s[j] == ' ' || s[j] == '\t' || s[j] == '\n' || s[j] == '\0')
+		j--;
+	while (i <= j)
+	{
+		str[++k] = s[i];
+		i++;
+	}
+	str[++k] = '\0';
+	return (str);
 }
-

@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnequ.c                                       :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tperret <tperret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/06 16:38:46 by tperret           #+#    #+#             */
-/*   Updated: 2014/11/07 11:24:01 by tperret          ###   ########.fr       */
+/*   Created: 2014/11/08 09:52:40 by tperret           #+#    #+#             */
+/*   Updated: 2014/11/08 09:52:42 by tperret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "libft.h"
 
-int	ft_strnequ(char const *s1, char const *s2, size_t n)
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
+	char	*s2;
 	size_t	i;
     
 	i = 0;
-	if (s1 == NULL || s2 == NULL)
+	if (s == NULL)
 		return (0);
-	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0' && i < (n - 1))
+	s2 = (char *)malloc(sizeof(*s2) * (len + 1));
+	if (s2 == NULL)
+		return (NULL);
+	while (i < len)
+	{
+		s2[i] = s[start];
 		i++;
-	if ((s1[i] - s2[i]) == 0)
-		return (1);
-	else
-		return (0);
+		start++;
+	}
+	s2[i] = '\0';
+	return (s2);
 }
-

@@ -6,7 +6,7 @@
 /*   By: tperret <tperret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/07 13:41:58 by tperret           #+#    #+#             */
-/*   Updated: 2014/11/07 15:07:40 by tperret          ###   ########.fr       */
+/*   Updated: 2014/11/08 10:33:37 by tperret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	test_memdel()
 	dprintf(1, "\x1b[32mOK\x1b[0m\n");
 }
 
-/*void	test_strnew()
+void	test_strnew()
 {
 	int		i;
 	char	*tmp;
@@ -79,7 +79,7 @@ void	test_strdel()
 		return;
 	}
 	dprintf(1, "\x1b[32mOK\x1b[0m\n");
-}*/
+}
 
 void	test_strclr()
 {
@@ -98,10 +98,10 @@ void	test_strclr()
 	dprintf(1, "\x1b[32mOK\x1b[0m\n");
 }
 
-/*void	char_to_upper(char *c)
+void	char_to_upper(char *c)
 {
 	*c = toupper(*c);
-}*/
+}
 
 void	test_striter()
 {
@@ -134,7 +134,7 @@ void	test_striteri()
 	dprintf(1, "\x1b[32mOK\x1b[0m\n");
 }
 
-/*char	yolo(char c)
+char	yolo(char c)
 {
 	if (c >= 'a' && c <= 'z')
 		return (c - 32);
@@ -182,7 +182,7 @@ void	test_strmapi()
 		return;
 	}
 	dprintf(1, "\x1b[32mOK\x1b[0m\n");
-}*/
+}
 
 void	test_strequ()
 {
@@ -236,7 +236,7 @@ void	test_strnequ()
 	dprintf(1, "\x1b[32mOK\x1b[0m\n");
 }
 
-/*void	test_strsub()
+void	test_strsub()
 {
 	char	tmp[] = "Hello MotherFucker";
 	char	*dst;
@@ -353,25 +353,25 @@ void	test_itoa()
 		}
 	}
 	dprintf(1, "\x1b[32mOK\x1b[0m\n");
-}*/
+}
 
 int		main()
 {
 	test_memalloc();
 	test_memdel();
-/*	test_strnew();
+	test_strnew();
 	test_strdel();
-	test_strclr();*/
+	test_strclr();
 	test_striter();
 	test_striteri();
-/*	test_strmap();
-	test_strmapi();*/
+	test_strmap();
+	test_strmapi();
 	test_strequ();
 	test_strnequ();
-/*	test_strsub();
+	test_strsub();
 	test_strjoin();
 	test_strtrim();
 	test_strsplit();
-	test_itoa();*/
+	test_itoa();
 	return (0);
 }
