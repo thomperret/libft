@@ -6,7 +6,7 @@
 /*   By: tperret <tperret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/08 09:55:06 by tperret           #+#    #+#             */
-/*   Updated: 2014/11/08 09:55:08 by tperret          ###   ########.fr       */
+/*   Updated: 2014/11/09 10:56:30 by tperret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strtrim(char const *s)
 	int		i;
 	int		j;
 	int		k;
-    
+
 	i = 0;
 	k = -1;
 	if (s == NULL)

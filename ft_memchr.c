@@ -6,7 +6,7 @@
 /*   By: tperret <tperret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/07 16:24:00 by tperret           #+#    #+#             */
-/*   Updated: 2014/11/07 16:27:41 by tperret          ###   ########.fr       */
+/*   Updated: 2014/11/09 10:37:08 by tperret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 {
 	unsigned char	*str1;
 	size_t			i;
-    
+
 	str1 = (unsigned char *)s;
 	i = 0;
 	if (str1 == NULL)

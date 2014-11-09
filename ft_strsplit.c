@@ -6,7 +6,7 @@
 /*   By: tperret <tperret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/08 10:28:33 by tperret           #+#    #+#             */
-/*   Updated: 2014/11/08 10:28:35 by tperret          ###   ########.fr       */
+/*   Updated: 2014/11/09 10:48:52 by tperret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static char	*ft_strsubb(char const *s, unsigned int start, size_t len)
 {
 	char	*str;
-    
+
 	str = (char *)malloc(sizeof(*str) * len + 1);
 	while (start < len)
 	{
@@ -31,7 +31,7 @@ static int	ft_count_word(char const *s, char c)
 {
 	int		i;
 	int		j;
-    
+
 	i = 0;
 	j = 0;
 	while (s[i])
@@ -52,7 +52,7 @@ char		**ft_strsplit(char const *s, char c)
 	int		i;
 	int		j;
 	int		l;
-    
+
 	i = 0;
 	j = 0;
 	if (s == NULL)

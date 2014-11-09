@@ -6,10 +6,9 @@
 /*   By: tperret <tperret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/08 09:52:40 by tperret           #+#    #+#             */
-/*   Updated: 2014/11/08 09:52:42 by tperret          ###   ########.fr       */
+/*   Updated: 2014/11/09 10:57:32 by tperret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "libft.h"
 
@@ -17,7 +16,7 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
 	char	*s2;
 	size_t	i;
-    
+
 	i = 0;
 	if (s == NULL)
 		return (0);

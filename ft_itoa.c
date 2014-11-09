@@ -6,7 +6,7 @@
 /*   By: tperret <tperret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/08 10:24:20 by tperret           #+#    #+#             */
-/*   Updated: 2014/11/08 10:24:21 by tperret          ###   ########.fr       */
+/*   Updated: 2014/11/09 10:58:48 by tperret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char		*ft_itoa(int n)
 	int		nblen;
 	int		nb;
 	int		i;
-    
+
 	nblen = (n < 0) ? 2 : 1;
 	nb = n;
 	i = ft_nb_count(n, nblen);

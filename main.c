@@ -5,473 +5,799 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tperret <tperret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/07 14:06:37 by tperret           #+#    #+#             */
-/*   Updated: 2014/11/07 17:08:51 by tperret          ###   ########.fr       */
+/*   Created: 2014/11/09 11:18:49 by tperret           #+#    #+#             */
+/*   Updated: 2014/11/09 11:31:03 by tperret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
-#include <ctype.h>
-#include <stdio.h>
+#include "libft.h"
 #include <string.h>
+#include <strings.h>
+#include <stdlib.h>
+#include <unistd.h>
 
-int		test_isalpha(void)
-{
-	int i=0;
-	while (i < 200)
-	{
-		if (ft_isalpha(i) != isalpha(i))
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
-int		test_isdigit(void)
-{
-	int i=0;
-	while (i < 200)
-	{
-		if (ft_isdigit(i) != isdigit(i))
-			return (0);
-		i++;
-	}
-	return (1);
-}
+/* Uncomment this if you don't have
+ ** Part 2
+ */
 
-int		test_isalnum(void)
-{
-	int i=0;
-	while (i < 200)
-	{
-		if (ft_isalnum(i) != isalnum(i))
-			return (0);
-		i++;
-	}
-	return (1);
-}
+/* #define NO_PART_2 */
 
-int		test_isascii(void)
-{
-	int i=0;
-	while (i < 200)
-	{
-		if (ft_isascii(i) != isascii(i))
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
-int		test_isprint(void)
-{
-	int i=0;
-	while (i < 200)
-	{
-		if (ft_isprint(i) != isprint(i))
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
-int		test_strncmp(void)
+#define NO_BONUS
+
+UT_TEST(ft_memset)
 {
-	char str[4][8] = {"", " ", "Ah", "Coucou"};
+	char	b1[100], b2[100];
     
-	int i=0;
-	int j;
-	int k;
-	while (i < 4)
-	{
-		j = 0;
-		while (j < 4)
-		{
-            k = 0;
-            while (k < 4)
-            {
-                if(ft_strncmp(str[i],str[j],k) != strncmp(str[i],str[j],k))
-                    return (0);
-                k++;
-            }
-            j++;
-		}
-		i++;
-	}
-	return (1);
+	ft_memset(b1, 42, 100);
+	memset(b2, 42, 100);
+	UT_ASSERT_EQ(memset(b1, 99, 0), ft_memset(b1, 99, 0));
+	UT_ASSERT_EQ(memcmp(b1, b2, 100), 0);
+	b1[0] = 1;
+	ft_memset(b1, 0, 0);
+	UT_ASSERT_EQ(b1[0], 1);
 }
-int		test_strcmp(void)
+
+UT_TEST(ft_bzero)
 {
-	char str[4][8] = {"", " ", "Ah", "Coucou"};
+	char	b1[10], b2[10];
     
-	int i=0;
-	int j;
-	while (i < 4)
-	{
-		j = 0;
-		while (j < 4)
-		{
-			if(ft_strcmp(str[i],str[j]) != strcmp(str[i],str[j]))
-				return (0);
-			j++;
-		}
-		i++;
-	}
-	return (1);
-}
-int		test_strlen(void)
-{
-	char *str="Coucou";
-	char *str2="";
-	if (ft_strlen(str) != strlen(str))
-		return (0);
-	if (ft_strlen(str2) != strlen(str2))
-		return (0);
-	return (1);
+	bzero(b1, 10);
+	bzero(b2, 10);
+	UT_ASSERT_EQ(memcmp(b1, b2, 10), 0);
+	b1[0] = 1;
+	ft_bzero(b1, 0);
+	UT_ASSERT_EQ(b1[0], 1);
 }
 
-int		test_strdup(void)
+UT_TEST(ft_memcpy)
 {
-	if (strcmp(ft_strdup("yo"),strdup("yo")) != 0)
-		return (0);
-	return (1);
-}
-
-int		test_strcpy(void)
-{
-	char dest[10];
-	char *src="Coucou";
-	if (strcmp(ft_strcpy(dest,src), strcpy(dest,src)) != 0)
-		return (0);
-	return (1);
-}
-int		test_strstr(void)
-{
-	char *s1="Coucou";
-	char *s2="Cou";
-	if(strcmp(ft_strstr(s1,s2), strstr(s1,s2)) != 0)
-		return (0);
-	return (1);
+	char	b1[100], b2[100];
     
+	ft_memcpy(b1, b2, 100);
+	UT_ASSERT_EQ(memcmp(b1, b2, 100), 0);
+	UT_ASSERT_EQ(b1, ft_memcpy(b1, b2, 0));
 }
 
-/*int		test_strnstr(void)
+UT_TEST(ft_memccpy)
 {
-	char *s1="Coucou";
-	char *s2="Cou";
-	int i=0;
-	while (i++ > 10)
-		if(strcmp(ft_strnstr(s1,s2,i), strnstr(s1,s2,i)) != 0)
-			return (0);
-    return (1);
-}*/
-
-int		test_strncpy(void)
-{
-	char dest[10];
-	char *src="Coucou";
-	int i=0;
-	if (strcmp(ft_strncpy(dest,src,i), strncpy(dest,src,i)) != 0)
-		return (0);
-	i = 5;
-	if (strcmp(ft_strncpy(dest,src,i), strncpy(dest,src,i)) != 0)
-		return (0);
-	i = 10;
-	if (strcmp(ft_strncpy(dest,src,i), strncpy(dest,src,i)) != 0)
-		return (0);
-	return (1);
-}
-
-int		test_strcat(void)
-{
-	char *s = "c est ";
-	char *s1 = "moi";
-	char *target = malloc(strlen(s) + strlen(s1) + 1);
-	strcpy(target, s);
+	char	buf1[] = "Ceci est un test.";
+	char	buf2[200];
+	void	*p1, *p2;
     
-	if (strcmp(ft_strcat(target,s1), strcat(target,s1)) != 0)
-		return (0);
-	free(target);
-	return (1);
+	p1 = memccpy(buf2, buf1, 'i', 10);
+	p2 = ft_memccpy(buf2, buf1, 'i', 10);
+	UT_ASSERT_EQ(p1, p2);
+	UT_ASSERT_EQ(ft_memccpy(buf2, buf1, 'k', 5), 0);
+	UT_ASSERT_EQ(ft_memccpy(buf2, buf1, 0, 0), memccpy(buf2, buf1, 0, 0));
+	UT_ASSERT_EQ(ft_memccpy(buf2, buf1, 0, sizeof(buf1)), memccpy(buf2, buf1, 0, sizeof(buf1)));
+	UT_ASSERT_EQ(ft_memccpy(buf2, buf1, 'C', 10), buf2 + 1);
 }
 
-int		test_strchr(void)
+UT_TEST(ft_memmove)
 {
-	char *s = "Mercure Venus Terre";
-	char c = ' ';
-	char z = 'z';
-	if (strcmp(ft_strchr(s,c), strchr(s,c)) != 0)
-		return (0);
-	if ((ft_strchr(s,z) != NULL && strchr(s,c) != NULL))
-		return (0);
-	return (1);
-}
-int		test_strrchr(void)
-{
-	char *s = "Mercure Venus Terre";
-	char c = ' ';
-	char z = 'z';
-	if (strcmp(ft_strrchr(s,c), strrchr(s,c)) != 0)
-		return (0);
-	if ((ft_strrchr(s,z) != NULL && strrchr(s,c) != NULL))
-		return (0);
-	return (1);
-}
-int		test_strncat(void)
-{
-	char *s = "c est ";
-	char *s1 = "moi";
-	int i = 0;
-	while (i < 15)
-	{
-        char *target = malloc(strlen(s) + strlen(s1) + 1);
-        strcpy(target, s);
-        if (strcmp(ft_strncat(target,s1,i), strncat(target,s1,i)) != 0)
-            return (0);
-        i++;
-	}
-	return (1);
-}
-int		test_strlcat(void)
-{
-	char *s = "c est ";
-	char *s1 = "moi";
-	char *s_ = "c est ";
-	char *s1_ = "moi";
-	int i = 0;
-	size_t k;
-	size_t j;
-	while (i < 15)
-	{
-        char *target = malloc(strlen(s) + strlen(s1) + 1);
-        char *target_ = malloc(strlen(s) + strlen(s1) + 1);
-        strcpy(target, s);
-        strcpy(target_, s_);
-        k = ft_strlcat(target,s1,i);
-        j = strlcat(target_,s1_,i);
-        if (k != j)
-            return (0);
-        //	printf("%lu", k);
-        //	printf("%lu", j);
-        i++;
-	}
-	return (1);
-}
-
-int		test_atoi(void)
-{
-	char str[15][15] =
-	{
-		{"000000110"},
-		{"-153"},
-		{"+132"},
-		{"++876"},
-		{"--132"},
-		{"dwbk "},
-		{"42jk "},
-		{" 21"},
-		{"      32 "},
-		{"\n		 42 32 "},
-		{"1-2"},
-		{"4+2 "},
-		{"	+442"},
-		{"  -4232 "},
-		{"4,5"},
-	};
+	char	test[] = "abcdef";
     
-	int i=0;
-	while (i < 15)
-	{
-        //	printf("%s = ", str[i]);
-        //	printf("%d\n", atoi(str[i]));
-        //	printf("%s = ", str[i]);
-        //	printf("%d\n", ft_atoi(str[i]));
-		if(atoi(str[i]) != ft_atoi(str[i]))
-            return (0);
-		i++;
-	}
-	return (1);
+	ft_memmove(test + 1, test, 5);
+	ft_memmove(test + 1, test, 0);
+	UT_ASSERT_EQ(strcmp(test, "aabcde"), 0);
 }
 
-int		test_memset(void)
+UT_TEST(ft_memchr)
 {
-	char *str=strdup("C M B   D T C");
-	int i = 0;
-	while (i < 2)
-	{
-        if(strcmp(ft_memset(str, '$', i), memset(str, '$', i)))
-            return (0);
-        i++;
-	}
-	return (1);
-}
-int		test_bzero(void)
-{
-	char *str=strdup("C M B   D T C");
-	char *str2=strdup("C M B   D T C");
-	int i = 0;
-	while (i < 15)
-	{
-		ft_bzero(str,i);
-		bzero(str2,i);
-        if(memcmp(str, str2, i) != 0)
-            return (0);
-        i++;
-	}
-	return (1);
-}
-/*int		test_memcmp(void)
-{
-	char str[4][8] = {"", " ", "Ah", "Coucou"};
+	char	test[] = "abcdef";
     
-	int i=0;
-	int j;
-	int k;
-	while (i < 4)
-	{
-		j = 0;
-		k = 0;
-		while (j < 4)
-		{
-			while (k < 8)
-			{
-				if (ft_memcmp(str[i],str[j],k) != memcmp(str[i],str[j],k))
-					return (0);
-				k++;
-			}
-			j++;
-		}
-		i++;
-	}
-	return (1);
-}*/
-int		test_memcpy(void)
-{
-	char	*src = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	char	dest[80];
-	char	*ptr;
-	char	*ptr2;
-	char	*src2 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	char	dest2[80];
-	bzero(dest,80);
-	bzero(dest2,80);
-	ptr = (char *) memcpy(dest, src, 26);
-	ptr2 = (char *) ft_memcpy(dest2, src2, 26);
-	if (strcmp(ptr, ptr2) != 0)
-		return (0);
-	return (1);
+	UT_ASSERT_EQ(ft_memchr(test, 'a', 5), test);
+	UT_ASSERT_EQ(ft_memchr(test, 'c', 5), test + 2);
+	UT_ASSERT_EQ(ft_memchr(test, '\0', 7), memchr(test, '\0', 7));
+	UT_ASSERT_EQ(ft_memchr(test, 'z', 6), 0);
 }
-int		test_memccpy(void)
+
+UT_TEST(ft_memcmp)
 {
-	char *srce = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	char dest[80];
-	char *ptr;
-	char *srce2 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	char dest2[80];
-	char *ptr2;
+	char	*t = "ab\0ab";
     
-	ptr = (char *) memccpy(dest, srce, 'I', strlen(srce));
-	ptr2 = (char *) ft_memccpy(dest2, srce2, 'I', strlen(srce2));
-	if (ptr && ptr2)
-	{
-		*ptr = '\0';
-		*ptr2 = '\0';
-	}
-	if (strcmp(dest,dest2) != 0)
-		return (0);
-	return (1);
+	UT_ASSERT_EQ(ft_memcmp(t, t, 5), 0);
+	UT_ASSERT_NEQ(ft_memcmp(t, "abcab", 5) ,0);
+	UT_ASSERT(ft_memcmp("aaa", "aab", 4) < 0);
+	UT_ASSERT_EQ(ft_memcmp("aww", "bpp", 0), 0);
 }
 
-int		test_memchr(void)
+UT_TEST(ft_strlen)
 {
-	char ch[30];
-	char *ptr;
-	char ch2[30];
-	char *ptr2;
+	UT_ASSERT_EQ(ft_strlen("chat"), strlen("chat"));
+	UT_ASSERT_EQ(ft_strlen(""), strlen(""));
+}
+
+UT_TEST(ft_strdup)
+{
+	char	*c;
     
-	strcpy(ch, "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-	strcpy(ch2, "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-	ptr = (char *) memchr(ch, 'I', strlen(ch));
-	ptr2 = (char *) ft_memchr(ch2, 'I', strlen(ch2));
-	if (strcmp(ptr, ptr2) != 0)
-		return (0);
-	return 1;
+	c = "AbC";
+	UT_ASSERT_EQ(strcmp(ft_strdup("aaaaa"), "aaaaa"), 0);
+	UT_ASSERT_EQ(strcmp(ft_strdup(""), ""), 0);
+	UT_ASSERT_NEQ(c, ft_strdup(c));
 }
 
-int		test_memmove(void)
+UT_TEST(ft_strcpy)
 {
-	char *dest = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-	char *str;
-	char *str2;
-	char *srce = "--------------------------";
-	str = strdup(dest);
-	str2 = strdup(dest);
-	memmove(str, srce, 25);
-	ft_memmove(str2, srce, 25);
-	if (strcmp(str,str2) != 0)
-		return (0);
-	return (1);
+	char	buf[6];
+    
+	ft_strcpy(buf, "abcde");
+	UT_ASSERT_EQ(strcmp(buf, "abcde"), 0);
 }
 
-int		test_tolower(void)
+UT_TEST(ft_strncpy)
 {
-	int i;
-	i = 0;
-	while (i < 127)
-	{
-		if (tolower(i) != ft_tolower(i))
-			return (0);
-        i++;
-	}
-	return (1);
+	char	b[6];
+    
+	ft_strncpy(b, "abc", 6);
+	UT_ASSERT_EQ(memcmp(b, "abc\0\0", 6), 0);
+	ft_strncpy(b, "abcdefghi", 6);
+	UT_ASSERT_EQ(memcmp(b, "abcdefghi", 6), 0);
 }
 
-int		test_toupper(void)
+UT_TEST(ft_strcat)
 {
-	int i;
-	i = 0;
-	while (i < 127)
-	{
-		if (toupper(i) != ft_toupper(i))
-			return (0);
-        i++;
-	}
-	return (1);
+	char	buf[9];
+    
+	bzero(buf, 9);
+	ft_strcat(buf, "Bon");
+	ft_strcat(buf, "jour.");
+	ft_strcat(buf, "");
+	UT_ASSERT_EQ(strcmp(buf, "Bonjour."), 0);
+	UT_ASSERT_EQ(buf, ft_strcat(buf, ""));
 }
 
-int main (void)
+UT_TEST(ft_strncat)
 {
-	printf("\nFONCTION DE LA PREMIERE PAGE\n\n");
-	printf("test ft_memset\t= %d\n", test_memset());
-	printf("test ft_bzero\t= %d\n", test_bzero());
-	printf("test ft_memcpy\t= %d\n", test_memcpy());
-	printf("test ft_memccpy\t= %d\n", test_memccpy());
-	printf("test ft_memmove\t= %d\n", test_memmove());
-	printf("test ft_memchr\t= %d\n", test_memchr());
-//	printf("test ft_memcmp\t= %d\n", test_memcmp());
-	printf("        ---\n");
-	printf("test ft_strlen\t= %d\n", test_strlen());
-	printf("test ft_strdup\t= %d\n", test_strdup());
-	printf("test ft_strcpy\t= %d\n", test_strcpy());
-	printf("test ft_strncpy\t= %d\n", test_strncpy());
-	printf("test ft_strcat\t= %d\n", test_strcat());
-	printf("test ft_strncat\t= %d\n", test_strncat());
-	printf("test ft_strlcat\t= %d\n", test_strlcat());
-	printf("test ft_strchr\t= %d\n", test_strchr());
-	printf("test ft_strrchr\t= %d\n", test_strrchr());
-	printf("test ft_strstr\t= %d\n", test_strstr());
-//	printf("test ft_strnstr\t= %d\n", test_strnstr());
-	printf("test ft_strcmp\t= %d\n", test_strcmp());
-	printf("test ft_strncmp\t= %d\n", test_strncmp());
-	printf("        ---\n");
-	printf("test ft_atoi\t= %d\n", test_atoi());
-	printf("test ft_isalpha\t= %d\n", test_isalpha());
-	printf("test ft_isdigit\t= %d\n", test_isdigit());
-	printf("test ft_isalnum\t= %d\n", test_isalnum());
-	printf("test ft_isascii\t= %d\n", test_isascii());
-	printf("test ft_isprint\t= %d\n", test_isprint());
-	printf("test ft_toupper\t= %d\n", test_toupper());
-	printf("test ft_tolower\t= %d\n", test_tolower());
+	char	buf[20];
+    
+	strcpy(buf, "To be ");
+	ft_strncat(buf, "or not to be", 6);
+	UT_ASSERT_EQ(strcmp(buf, "To be or not"), 0);
+	ft_strncat(buf, "efefef", 0);
+	UT_ASSERT_EQ(strcmp(buf, "To be or not"), 0);
+	UT_ASSERT_EQ(buf, ft_strncat(buf, "", 0));
+}
+
+UT_TEST(ft_strlcat)
+{
+	char	buf[10];
+    
+	bzero(buf, 10);
+	strcpy(buf, "abc");
+	ft_strlcat(buf, "abcdefghijklmnop", 10);
+	UT_ASSERT_EQ(strcmp(buf, "abcabcdef"), 0);
+	UT_ASSERT_EQ(ft_strlcat(buf, "abcd", 2), 6);
+	bzero(buf, 10);
+	UT_ASSERT_EQ(ft_strlcat(buf, "abc", 10), 3);
+	UT_ASSERT_EQ(ft_strlcat(buf, "def", 10), 6);
+	bzero(buf, 10);
+	memset(buf, 'a', 10);
+	UT_ASSERT_EQ(ft_strlcat(buf, "ccc", 10), 13);
+}
+
+UT_TEST(ft_strchr)
+{
+	char	buf[] = "Je suis un poisson.";
+    
+	UT_ASSERT_EQ(strchr(buf, 'p'), ft_strchr(buf, 'p'));
+	UT_ASSERT_EQ(strchr(buf, 0), ft_strchr(buf, 0));
+	UT_ASSERT_EQ(ft_strchr(buf, 'J'), buf);
+	UT_ASSERT_EQ(ft_strchr(buf, 'z'), 0);
+}
+
+UT_TEST(ft_strrchr)
+{
+	char	buf[] = "abcdedcba";
+    
+	UT_ASSERT_EQ(strrchr(buf, 'a'), ft_strrchr(buf, 'a'));
+	UT_ASSERT_EQ(strrchr(buf, 0), ft_strrchr(buf, 0));
+	UT_ASSERT_EQ(ft_strrchr(buf, 'z'), 0);
+	buf[5] = 0;
+	UT_ASSERT_EQ(ft_strrchr(buf, 'a'), buf);
+}
+
+UT_TEST(ft_strstr)
+{
+	char	buf[] = "Ceci n'est pas une pipe.";
+    
+	UT_ASSERT_EQ(strstr(buf, "une"), ft_strstr(buf, "une"));
+	UT_ASSERT_EQ(strstr(buf, ""), ft_strstr(buf, ""));
+	UT_ASSERT_EQ(strstr(buf, "aaaaa"), ft_strstr(buf, "aaaaa"));
+	UT_ASSERT_EQ(ft_strstr(buf, "BWAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"), NULL);
+}
+
+UT_TEST(ft_strnstr)
+{
+	char	buf[10];
+    
+	bzero(buf, 10);
+	strcpy(buf, "un deux 9");
+	UT_ASSERT_EQ(strnstr(buf, "deux", 10), ft_strnstr(buf, "deux", 10));
+	UT_ASSERT_EQ(strnstr(buf, "9", 3), ft_strnstr(buf, "9", 3));
+	UT_ASSERT_EQ(ft_strnstr(buf, "", 6), buf);
+	UT_ASSERT_EQ(ft_strnstr(buf, "deux", 5), strnstr(buf, "deux", 5));
+	UT_ASSERT_EQ(ft_strnstr(buf, "9", 10), strnstr(buf, "9", 10));
+	buf[9] = '6';
+	UT_ASSERT_EQ(strnstr(buf, "cinq", 10), ft_strnstr(buf, "cinq", 10));
+	UT_ASSERT_EQ(strnstr(buf, "deux", 10), ft_strnstr(buf, "deux", 10));
+	UT_ASSERT_EQ(strnstr(buf, "9682", 10), ft_strnstr(buf, "9682", 10));
+	UT_ASSERT_EQ(strnstr(buf, "6", 10), ft_strnstr(buf, "6", 10));
+	buf[1] = 0;
+	UT_ASSERT_EQ(strnstr(buf, "deux", 10), ft_strnstr(buf, "deux", 10));
+}
+
+UT_TEST(ft_strcmp)
+{
+	UT_ASSERT_EQ(ft_strcmp("abc", "abc"), 0);
+	UT_ASSERT(ft_strcmp("abc", "abd") < 0);
+	UT_ASSERT_NEQ(ft_strcmp("a", "abcde"), 0)
+}
+
+UT_TEST(ft_strncmp)
+{
+	UT_ASSERT_EQ(ft_strncmp("abc", "abcde", 3), 0);
+	UT_ASSERT_EQ(ft_strncmp("abc", "abc\0defg", 100), 0);
+	UT_ASSERT_NEQ(ft_strncmp("ab\0cde", "abcc\0e", 20), 0);
+}
+
+UT_TEST(ft_atoi)
+{
+	UT_ASSERT_EQ(ft_atoi(" -sfecf"), 0);
+	UT_ASSERT_EQ(ft_atoi("+2798"), 2798);
+	UT_ASSERT_EQ(ft_atoi("  \t\n  \r\r\v\f-899"), -899);
+	UT_ASSERT_EQ(ft_atoi("+0089"), 89);
+	UT_ASSERT_EQ(ft_atoi("-2147483648"), -2147483648);
+	UT_ASSERT_EQ(ft_atoi("a56"), 0);
+	UT_ASSERT_EQ(ft_atoi("    555 5555555555555555"), 555);
+}
+
+UT_TEST(ft_isalpha)
+{
+	UT_ASSERT_NEQ(ft_isalpha('a'), 0);
+	UT_ASSERT_EQ(ft_isalpha('a' + 0x100), 0);
+	UT_ASSERT_EQ(ft_isalpha('2'), 0);
+	UT_ASSERT_NEQ(ft_isalpha('Z'), 0);
+	UT_ASSERT_NEQ(ft_isalpha('t'), 0);
+}
+
+UT_TEST(ft_isdigit)
+{
+	UT_ASSERT_EQ(ft_isdigit(0), 0);
+	UT_ASSERT_NEQ(ft_isdigit('8'), 0);
+	UT_ASSERT_EQ(ft_isdigit('8' + 0x100), 0);
+}
+
+UT_TEST(ft_isalnum)
+{
+	UT_ASSERT_EQ(ft_isalnum(' '), 0);
+	UT_ASSERT_NEQ(ft_isalnum('6'), 0);
+	UT_ASSERT_NEQ(ft_isalnum('Z'), 0);
+	UT_ASSERT_EQ(ft_isalnum('5' + 0x100), 0);
+}
+
+UT_TEST(ft_isascii)
+{
+	UT_ASSERT_EQ(ft_isascii(200), 0);
+	UT_ASSERT_NEQ(ft_isascii(0), 0);
+	UT_ASSERT_NEQ(ft_isascii(127), 0);
+}
+
+UT_TEST(ft_isprint)
+{
+	UT_ASSERT_EQ(ft_isprint(0), 0);
+	UT_ASSERT_EQ(ft_isprint(127), 0);
+	UT_ASSERT_NEQ(ft_isprint(' '), 0);
+	UT_ASSERT_NEQ(ft_isprint('a'), 0);
+	UT_ASSERT_NEQ(ft_isprint(126), 0);
+}
+
+UT_TEST(ft_toupper)
+{
+	UT_ASSERT_EQ(ft_toupper('a'), 'A');
+	UT_ASSERT_EQ(ft_toupper(12345), 12345);
+	UT_ASSERT_EQ(ft_toupper(' '), ' ');
+	UT_ASSERT_EQ(ft_toupper('Z'), 'Z');
+}
+
+UT_TEST(ft_tolower)
+{
+	UT_ASSERT_EQ(ft_tolower('T'), 't');
+	UT_ASSERT_EQ(ft_tolower(99999), 99999);
+	UT_ASSERT_EQ(ft_tolower('e'), 'e');
+}
+
+#ifndef NO_PART_2
+
+UT_TEST(ft_memalloc)
+{
+	void	*mem1, *mem2;
+    
+	mem1 = malloc(100);
+	bzero(mem1, 100);
+	mem2 = ft_memalloc(100);
+	UT_ASSERT_EQ(memcmp(mem1, mem2, 100), 0);
+	UT_ASSERT_EQ(ft_memalloc(0), NULL);
+	UT_ASSERT_EQ(ft_memalloc((size_t)-1), NULL);
+}
+
+UT_TEST(ft_memdel)
+{
+	void	*mem;
+    
+	mem = malloc(2000);
+	ft_memdel(&mem);
+	UT_ASSERT_EQ(mem, NULL);
+}
+
+UT_TEST(ft_strnew)
+{
+	char	*str;
+	char	*t;
+    
+	str = ft_strnew(0);
+	UT_ASSERT_NEQ(str, NULL);
+	str = ft_strnew(100);
+	t = malloc(101);
+	bzero(t, 101);
+	UT_ASSERT_EQ(memcmp(str, t, 101), 0);
+	UT_ASSERT_NEQ(ft_strnew(0), 0);
+	UT_ASSERT_EQ(ft_strnew((size_t)-10), 0);
+}
+
+UT_TEST(ft_strdel)
+{
+	char	*str;
+    
+	str = malloc(123);
+	ft_strdel(&str);
+	UT_ASSERT_EQ(str, NULL);
+}
+
+UT_TEST(ft_strclr)
+{
+	char	str[] = "tttttt";
+    
+	ft_strclr(str);
+	UT_ASSERT_EQ(memcmp(str, "\0\0\0\0\0\0", 7), 0);
+}
+
+void	it_test(char *c)
+{
+	*c = *c + 1;
+}
+
+UT_TEST(ft_striter)
+{
+	char	str[] = "aBcDeF";
+    
+	ft_striter(str, it_test);
+	UT_ASSERT_EQ(strcmp(str, "bCdEfG"), 0);
+}
+
+void	iti_test(unsigned int i, char *c)
+{
+	*c = *c + i;
+}
+
+UT_TEST(ft_striteri)
+{
+	char	str[] = "aBcDeF";
+    
+	ft_striteri(str, iti_test);
+	UT_ASSERT_EQ(strcmp(str, "aCeGiK"), 0);
+}
+
+char	map_test(char c)
+{
+	return (c + 1);
+}
+
+UT_TEST(ft_strmap)
+{
+	char	*str;
+    
+	str = "abcde";
+	str = ft_strmap(str, map_test);
+	UT_ASSERT_EQ(ft_strcmp(str, "bcdef"), 0);
+}
+
+char	mapi_test(unsigned int i, char c)
+{
+	return (c + i);
+}
+
+UT_TEST(ft_strmapi)
+{
+	char	*str;
+    
+	str = "abcde";
+	str = ft_strmapi(str, mapi_test);
+	UT_ASSERT_EQ(ft_strcmp(str, "acegi"), 0);
+}
+
+UT_TEST(ft_strequ)
+{
+	UT_ASSERT_EQ(ft_strequ("", ""), 1);
+	UT_ASSERT_EQ(ft_strequ("abcDEF", "abcDEF"), 1);
+	UT_ASSERT_EQ(ft_strequ("abcDEF", "abcDEf"), 0);
+}
+
+UT_TEST(ft_strnequ)
+{
+	UT_ASSERT_EQ(ft_strnequ("ededeqdf", "", 0), 1);
+	UT_ASSERT_EQ(ft_strnequ("abcde", "abdfe", 2), 1);
+	UT_ASSERT_EQ(ft_strnequ("abc", "abc", 100), 1);
+	UT_ASSERT_EQ(ft_strnequ("abcde", "abdde", 5), 0);
+}
+
+UT_TEST(ft_strsub)
+{
+	char	*str;
+    
+	str = "Un jour je serai, le meilleur dresseur !";
+	UT_ASSERT_EQ(ft_strsub(str, 0, (size_t)-10), NULL);
+	UT_ASSERT_EQ(strcmp(ft_strsub(str, 8, 8), "je serai"), 0);
+	UT_ASSERT_EQ(strcmp(ft_strsub(str, 0, 0), ""), 0);
+}
+
+UT_TEST(ft_strjoin)
+{
+	UT_ASSERT_EQ(strcmp(ft_strjoin("abc", "def"), "abcdef"), 0);
+	UT_ASSERT_EQ(strcmp(ft_strjoin("", ""), ""), 0);
+}
+
+UT_TEST(ft_strtrim)
+{
+	UT_ASSERT_EQ(strcmp(ft_strtrim("\t\n  \tAAA \t BBB\t\n  \t"), "AAA \t BBB"), 0);
+	UT_ASSERT_EQ(strcmp(ft_strtrim("\t\t\n\t\t   "), ""), 0);
+	UT_ASSERT_EQ(strcmp(ft_strtrim(""), ""), 0);
+	UT_ASSERT_EQ(strcmp(ft_strtrim("abc"), "abc"), 0);
+}
+
+UT_TEST(ft_strsplit)
+{
+	char	**tt;
+    
+	tt = ft_strsplit("***salut****!**", '*');
+	UT_ASSERT_EQ(strcmp(tt[0], "salut"), 0);
+	UT_ASSERT_EQ(strcmp(tt[1], "!"), 0);
+	UT_ASSERT_EQ(tt[2], NULL);
+	tt = ft_strsplit("*****", '*');
+	UT_ASSERT_EQ(tt[0], NULL);
+	tt = ft_strsplit("coucou", '*');
+	UT_ASSERT_EQ(strcmp(tt[0], "coucou"), 0);
+	UT_ASSERT_EQ(tt[1], NULL);
+}
+
+UT_TEST(ft_itoa)
+{
+	UT_ASSERT_EQ(strcmp(ft_itoa(0), "0"), 0);
+	UT_ASSERT_EQ(strcmp(ft_itoa(-1234), "-1234"), 0);
+	UT_ASSERT_EQ(strcmp(ft_itoa(123456000), "123456000"), 0);
+	UT_ASSERT_EQ(strcmp(ft_itoa(-2147483648), "-2147483648"), 0);
+}
+
+UT_TEST(ft_putchar)
+{
+	int		out;
+	int		p[2];
+	char	buf[4];
+    
+	out = dup(1);
+	pipe(p);
+	dup2(p[1], 1);
+	ft_putchar('a');
+	ft_putchar('b');
+	ft_putchar('c');
+	dup2(out, 1);
+	read(p[0], buf, 3);
+	buf[3] = 0;
+	close(p[0]);
+	close(p[1]);
+	close(out);
+	UT_ASSERT_EQ(strcmp(buf, "abc"), 0);
+}
+
+UT_TEST(ft_putstr)
+{
+	int		out;
+	int		p[2];
+	char	buf[4];
+    
+	out = dup(1);
+	pipe(p);
+	dup2(p[1], 1);
+	ft_putstr("aaa");
+	dup2(out, 1);
+	read(p[0], buf, 3);
+	buf[3] = 0;
+	close(p[0]);
+	close(p[1]);
+	close(out);
+	UT_ASSERT_EQ(strcmp(buf, "aaa"), 0);
+}
+
+UT_TEST(ft_putendl)
+{
+	int		out;
+	int		p[2];
+	char	buf[4];
+    
+	out = dup(1);
+	pipe(p);
+	dup2(p[1], 1);
+	ft_putendl("aa");
+	dup2(out, 1);
+	read(p[0], buf, 3);
+	buf[3] = 0;
+	close(p[0]);
+	close(p[1]);
+	close(out);
+	UT_ASSERT_EQ(strcmp(buf, "aa\n"), 0);
+}
+
+UT_TEST(ft_putnbr)
+{
+	int		out;
+	int		p[2];
+	char	buf[100];
+    
+	out = dup(1);
+	pipe(p);
+	dup2(p[1], 1);
+	ft_putnbr(0);
+	ft_putnbr(12300);
+	ft_putnbr(-56);
+	ft_putnbr(-2147483648);
+	dup2(out, 1);
+	buf[read(p[0], buf, 100)] = 0;
+	close(p[0]);
+	close(p[1]);
+	close(out);
+	UT_ASSERT_EQ(strcmp(buf, "012300-56-2147483648"), 0);
+}
+
+UT_TEST(ft_putchar_fd)
+{
+	int		p[2];
+	char	buf[100];
+    
+	pipe(p);
+	ft_putchar_fd('a', p[1]);
+	ft_putchar_fd('b', p[1]);
+	buf[read(p[0], buf, 100)] = 0;
+	close(p[0]);
+	close(p[1]);
+	UT_ASSERT_EQ(strcmp(buf, "ab"), 0);
+}
+
+UT_TEST(ft_putstr_fd)
+{
+	int		p[2];
+	char	buf[100];
+    
+	pipe(p);
+	ft_putstr_fd("A QUE KOUKOU", p[1]);
+	buf[read(p[0], buf, 100)] = 0;
+	close(p[0]);
+	close(p[1]);
+	UT_ASSERT_EQ(strcmp(buf, "A QUE KOUKOU"), 0);
+}
+
+UT_TEST(ft_putendl_fd)
+{
+	int		p[2];
+	char	buf[100];
+    
+	pipe(p);
+	ft_putendl_fd("A QUE KOUKOU", p[1]);
+	buf[read(p[0], buf, 100)] = 0;
+	close(p[0]);
+	close(p[1]);
+	UT_ASSERT_EQ(strcmp(buf, "A QUE KOUKOU\n"), 0);
+}
+
+UT_TEST(ft_putnbr_fd)
+{
+	int		p[2];
+	char	buf[100];
+    
+	pipe(p);
+	ft_putnbr_fd(0, p[1]);
+	ft_putnbr_fd(56, p[1]);
+	ft_putnbr_fd(-1230, p[1]);
+	ft_putnbr_fd(-2147483648, p[1]);
+	buf[read(p[0], buf, 100)] = 0;
+	close(p[0]);
+	close(p[1]);
+	UT_ASSERT_EQ(strcmp(buf, "056-1230-2147483648"), 0);
+}
+
+#endif
+
+#ifndef NO_BONUS
+
+UT_TEST(ft_lstnew)
+{
+	t_list	*list;
+	int		ft;
+    
+	ft = 42;
+	list = ft_lstnew(&ft, sizeof(int));
+	UT_ASSERT_EQ((*(int*)(list->content)), 42);
+	list = ft_lstnew(NULL, 386);
+	UT_ASSERT_EQ((list->content_size), 0);
+}
+
+int		____diddel;
+
+void	del_test(void *data, size_t i)
+{
+	(void)data;
+	(void)i;
+	____diddel++;
+}
+
+UT_TEST(ft_lstdelone)
+{
+	t_list	*list;
+	int		ft;
+    
+	____diddel = 0;
+	ft = 42;
+	list = (t_list *)malloc(sizeof(t_list));
+	list->content = &ft;
+	list->content_size = sizeof(int);
+	ft_lstdelone(&list, del_test);
+	UT_ASSERT_EQ(list, NULL);
+	UT_ASSERT_EQ(____diddel, 1);
+}
+
+UT_TEST(ft_lstdel)
+{
+	t_list	*list;
+	int		ft;
+    
+	ft = 42;
+	____diddel = 0;
+	list = malloc(sizeof(t_list));
+	bzero(list, sizeof(t_list));
+	list->next = malloc(sizeof(t_list));
+	bzero(list->next, sizeof(t_list));
+	list->content = &ft;
+	list->next->content = (&ft) + 1;
+	ft_lstdel(&list, del_test);
+	UT_ASSERT_EQ(list, NULL);
+	UT_ASSERT_EQ(____diddel, 2);
+}
+
+UT_TEST(ft_lstadd)
+{
+	t_list	*list;
+	t_list	*list2;
+    
+	list = malloc(sizeof(t_list));
+	list2 = malloc(sizeof(t_list));
+	bzero(list, sizeof(t_list));
+	bzero(list2, sizeof(t_list));
+	ft_lstadd(&list2, list);
+	UT_ASSERT_EQ(list, list2);
+	UT_ASSERT_NEQ(list->next, NULL);
+}
+
+void	lstiter_test(t_list *ppp)
+{
+	ppp->content_size = 42;
+}
+
+UT_TEST(ft_lstiter)
+{
+	t_list	*list;
+    
+	bzero((list = malloc(sizeof(t_list))), sizeof(t_list));
+	bzero(((list->next) = malloc(sizeof(t_list))), sizeof(t_list));
+	ft_lstiter(list, lstiter_test);
+	UT_ASSERT_EQ(list->content_size, 42);
+	UT_ASSERT_EQ(list->next->content_size, 42);
+}
+
+t_list	*lstmap_test(t_list *list)
+{
+	t_list	*l2;
+    
+	l2 = malloc(sizeof(t_list));
+	bzero(l2, sizeof(t_list));
+	l2->content_size = list->content_size * 2;
+	return (l2);
+}
+
+UT_TEST(ft_lstmap)
+{
+	t_list	*list;
+	t_list	*map;
+    
+	bzero((list = malloc(sizeof(t_list))), sizeof(t_list));
+	bzero((list->next = malloc(sizeof(t_list))), sizeof(t_list));
+	list->content_size = 21;
+	list->next->content_size = 100;
+	map = ft_lstmap(list, lstmap_test);
+	UT_ASSERT_EQ(list->content_size, 21);
+	UT_ASSERT_EQ(list->next->content_size, 100);
+	UT_ASSERT_EQ(map->content_size, 42);
+	UT_ASSERT_EQ(map->next->content_size, 200);
+}
+
+#endif
+
+int	main(void)
+{
+	UT_ADD_TEST(ft_memset);
+	UT_ADD_TEST(ft_bzero);
+	UT_ADD_TEST(ft_memcpy);
+	UT_ADD_TEST(ft_memccpy);
+	UT_ADD_TEST(ft_memmove);
+	UT_ADD_TEST(ft_memchr);
+	UT_ADD_TEST(ft_memcmp);
+	UT_ADD_TEST(ft_strlen);
+	UT_ADD_TEST(ft_strdup);
+	UT_ADD_TEST(ft_strcpy);
+	UT_ADD_TEST(ft_strncpy);
+	UT_ADD_TEST(ft_strcat);
+	UT_ADD_TEST(ft_strncat);
+	UT_ADD_TEST(ft_strlcat);
+	UT_ADD_TEST(ft_strchr);
+	UT_ADD_TEST(ft_strrchr);
+	UT_ADD_TEST(ft_strstr);
+	UT_ADD_TEST(ft_strnstr);
+	UT_ADD_TEST(ft_strcmp);
+	UT_ADD_TEST(ft_strncmp);
+	UT_ADD_TEST(ft_atoi);
+	UT_ADD_TEST(ft_isalpha);
+	UT_ADD_TEST(ft_isdigit);
+	UT_ADD_TEST(ft_isalnum);
+	UT_ADD_TEST(ft_isascii);
+	UT_ADD_TEST(ft_isprint);
+	UT_ADD_TEST(ft_toupper);
+	UT_ADD_TEST(ft_tolower);
+#ifndef NO_PART_2
+	UT_ADD_TEST(ft_memalloc);
+	UT_ADD_TEST(ft_memdel);
+	UT_ADD_TEST(ft_strnew);
+	UT_ADD_TEST(ft_strdel);
+	UT_ADD_TEST(ft_strclr);
+	UT_ADD_TEST(ft_striter);
+	UT_ADD_TEST(ft_striteri);
+	UT_ADD_TEST(ft_strmap);
+	UT_ADD_TEST(ft_strmapi);
+	UT_ADD_TEST(ft_strequ);
+	UT_ADD_TEST(ft_strnequ);
+	UT_ADD_TEST(ft_strsub);
+	UT_ADD_TEST(ft_strjoin);
+	UT_ADD_TEST(ft_strtrim);
+	UT_ADD_TEST(ft_strsplit);
+	UT_ADD_TEST(ft_itoa);
+	UT_ADD_TEST(ft_putchar);
+	UT_ADD_TEST(ft_putstr);
+	UT_ADD_TEST(ft_putendl);
+	UT_ADD_TEST(ft_putnbr);
+	UT_ADD_TEST(ft_putchar_fd);
+	UT_ADD_TEST(ft_putstr_fd);
+	UT_ADD_TEST(ft_putendl_fd);
+	UT_ADD_TEST(ft_putnbr_fd);
+#endif
+#ifndef	NO_BONUS
+	UT_ADD_TEST(ft_lstnew);
+	UT_ADD_TEST(ft_lstdelone);
+	UT_ADD_TEST(ft_lstdel);
+	UT_ADD_TEST(ft_lstadd);
+	UT_ADD_TEST(ft_lstiter);
+	UT_ADD_TEST(ft_lstmap);
+#endif
+	UT_RUN_ALL_TESTS();
 	return (0);
 }
-

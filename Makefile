@@ -6,7 +6,7 @@
 #    By: tperret <tperret@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/06 17:12:52 by tperret           #+#    #+#              #
-#    Updated: 2014/11/07 17:06:38 by tperret          ###   ########.fr        #
+#    Updated: 2014/11/09 11:19:49 by tperret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SOURCES =	ft_memset.c		\
 			ft_strchr.c		\
 			ft_strrchr.c	\
 			ft_strstr.c		\
+			ft_putendl.c	\
 			ft_strcmp.c		\
 			ft_strncmp.c	\
 			ft_atoi.c		\
@@ -49,12 +50,22 @@ SOURCES =	ft_memset.c		\
 			ft_strnequ.c	\
 			ft_putchar.c	\
 			ft_putstr.c		\
+			ft_strnew.c		\
+			ft_strdel.c		\
+			ft_strclr.c		\
+			ft_strmap.c		\
+			ft_strmapi.c	\
+			ft_strsub.c		\
+			ft_strjoin.c	\
+			ft_strtrim.c	\
+			ft_strsplit.c	\
 			ft_putnbr.c		\
 			ft_putstr_fd.c	\
 			ft_putchar_fd.c \
-			ft_strclr.c
+			ft_strclr.c		\
+			ft_itoa.c
 
-HEADERS	= -Iincludes/
+HEADERS	= -I/
 
 OBJECTS	= $(subst .c,.o,$(SOURCES))
 

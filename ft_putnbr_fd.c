@@ -6,7 +6,7 @@
 /*   By: tperret <tperret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/08 10:06:55 by tperret           #+#    #+#             */
-/*   Updated: 2014/11/08 10:07:52 by tperret          ###   ########.fr       */
+/*   Updated: 2014/11/09 10:39:47 by tperret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_putnbr_fd(int n, int fd)
 {
 	char	*value;
-    
+
 	value = ft_itoa(n);
 	ft_putstr_fd(value, fd);
 }

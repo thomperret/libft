@@ -6,7 +6,7 @@
 /*   By: tperret <tperret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/08 09:46:52 by tperret           #+#    #+#             */
-/*   Updated: 2014/11/08 09:50:09 by tperret          ###   ########.fr       */
+/*   Updated: 2014/11/09 10:55:11 by tperret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*ft_strnew(size_t size)
 {
 	char	*s;
 	size_t	i;
-    
+
 	i = 0;
 	s = (char *)malloc(sizeof(*s) * size);
 	if (s == NULL)

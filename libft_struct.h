@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmap.c                                        :+:      :+:    :+:   */
+/*   libft_struct.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tperret <tperret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/08 09:50:21 by tperret           #+#    #+#             */
-/*   Updated: 2014/11/09 10:44:18 by tperret          ###   ########.fr       */
+/*   Created: 2014/11/06 18:05:08 by tperret           #+#    #+#             */
+/*   Updated: 2014/11/06 18:05:13 by tperret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef LIBFT_STRUCT_H
+# define LIBFT_STRUCT_H
 
-char	*ft_strmap(char const *s, char (*f)(char))
+typedef struct			s_list_dnew
 {
-	char	*s2;
-	int		i;
+	void				*data;
+	struct s_list_dnew	*prev;
+	struct s_list_dnew	*next;
+}						t_dnew;
 
-	if (s != NULL && f != NULL)
-	{
-		i = 0;
-		s2 = (char *)malloc(sizeof(*s2) * ft_strlen(s));
-		if (s2 == NULL)
-			return (NULL);
-		while (s[i] != '\0')
-		{
-			s2[i] = f(s[i]);
-			i++;
-		}
-		return (s2);
-	}
-	return (0);
-}
+typedef struct			s_dlist
+{
+	size_t				size;
+	t_dnew				*head;
+	t_dnew				*tail;
+}						t_dlist;
+
+#endif
