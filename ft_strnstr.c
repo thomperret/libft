@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memalloc.c                                      :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tperret <tperret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/06 13:08:25 by tperret           #+#    #+#             */
-/*   Updated: 2014/11/11 14:36:37 by tperret          ###   ########.fr       */
+/*   Created: 2014/11/10 11:53:13 by tperret           #+#    #+#             */
+/*   Updated: 2014/11/10 13:26:26 by tperret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memalloc(size_t size)
+char	*ft_strnstr(const char *s1, const char *s2, size_t n)
 {
-	void			*memory;
-	unsigned int	counter;
-	char			*e;
+	size_t		i;
+	size_t		j;
 
-	counter = 0;
-	memory = (void *)malloc(size);
-	if (!memory)
-		return (NULL);
-	e = (char *)memory;
-	if (memory != NULL)
+	i = 0;
+	if (!*s2)
+		return ((char *)s1);
+	while (s1[i] && i < n)
 	{
-		while (counter++ < size)
-			*e++ = 0;
+		j = 0;
+		while (s1[i + j] == s2[j] && s1[i + j] && s2[j] && (i + j) < n)
+			j++;
+		if (!s2[j])
+			return ((char *)&s1[i]);
+		i++;
 	}
-	return (memory);
+	return (NULL);
 }

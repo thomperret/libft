@@ -6,7 +6,7 @@
 #    By: tperret <tperret@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/06 17:12:52 by tperret           #+#    #+#              #
-#    Updated: 2014/11/09 11:19:49 by tperret          ###   ########.fr        #
+#    Updated: 2014/11/11 16:39:56 by tperret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,11 @@ SOURCES =	ft_memset.c		\
 			ft_memcmp.c		\
 			ft_memalloc.c	\
 			ft_putendl_fd.c	\
+			ft_putnbr_fd.c	\
+			ft_lstiter.c	\
+			ft_lstdelone.c	\
+			ft_lstdel.c		\
+			ft_lstadd.c		\
 			ft_memchr.c		\
 			ft_memccpy.c	\
 			ft_memmove.c	\
@@ -38,6 +43,7 @@ SOURCES =	ft_memset.c		\
 			ft_atoi.c		\
 			ft_isalpha.c	\
 			ft_isdigit.c	\
+			ft_strnstr.c	\
 			ft_isalnum.c	\
 			ft_isascii.c	\
 			ft_isprint.c	\
@@ -80,29 +86,17 @@ all: $(NAME)
 $(NAME): $(OBJECTS)
 	ar rc $(NAME) $(OBJECTS)
 	ranlib $(NAME)
-	printf "\e[32m----------------------------------\e[36m\n"
-	printf "\e[32m[✔]\e[36m $@"
-	printf "\n\e[32m----------------------------------\e[36m"
-	printf "\033[0m\n"
 
 %.o: %.c
 	$(CC) $(WFLAGS) $(HEADERS) -c -o $@ $^
-	printf "\e[32m[✔]\e[36m $@ "
-	printf "\033[0m\n"
+
 
 clean:
 	rm -rf $(OBJECTS)
-	printf "\e[31m----------------------------------\n"
-	printf "[✔]\e[36m $(NAME): Objects deleted\n"
-	printf "\e[31m----------------------------------\e[36m"
-	printf "\033[0m\n"
 
 fclean: clean
 	rm -rf $(NAME)
-	printf "\e[31m----------------------------------\n"
-	printf "[✔]\e[36m $(NAME): All deleted\n"
-	printf "\e[31m----------------------------------\e[36m"
-	printf "\033[0m\n"
+
 
 re: fclean all
 

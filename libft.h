@@ -6,7 +6,7 @@
 /*   By: tperret <tperret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/06 17:32:20 by tperret           #+#    #+#             */
-/*   Updated: 2014/11/09 11:22:00 by tperret          ###   ########.fr       */
+/*   Updated: 2014/11/11 15:45:39 by tperret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,16 @@
 
 # include <string.h>
 # include <stdlib.h>
-# include "libft_struct.h"
 # include <unistd.h>
 
 # define BUFF_SIZE 100
+
+typedef struct		s_list
+{
+	void			*content;
+	size_t			content_size;
+	struct s_list	*next;
+}					t_list;
 
 void	ft_putendl(char const *s);
 void	*ft_memset(void *b, int c, size_t len);
@@ -72,4 +78,10 @@ void	ft_putstr(char const *s);
 void	ft_putnbr(int n);
 void	ft_putstr_fd(char const *s, int fd);
 void	ft_putendl_fd(char const *s, int fd);
+char	*ft_strnstr(const char *s1, const char *s2, size_t n);
+void	ft_lstdelone(t_list **alst, void (*del)(void*, size_t));
+void	ft_lstdel(t_list **alst, void (*del)(void *, size_t));
+void	ft_lstadd(t_list **alst, t_list *new);
+void	ft_lstiter(t_list *lst, void (*f)(t_list *elem));
+
 #endif
